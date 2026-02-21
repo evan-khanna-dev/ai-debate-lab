@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Debate Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <button class="new-debate-btn" id="newDebateBtn" title="New debate">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          New debate
+        </button>
+      </div>
+      <nav class="debate-list" id="debateList">
+        <!-- Past debates loaded via JS -->
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="chat-area" id="chatArea">
+        <div class="welcome-screen" id="welcomeScreen">
+          <div class="welcome-content">
+            <h1>AI Debate Lab</h1>
+            <p>Watch two chatbots (PRO vs CON) debate any topic. Set names and roles below; roles define the character they stay in (default PRO / CON).</p>
+            <div class="bot-config-grid">
+              <div class="bot-config-block">
+                <span class="bot-config-heading">PRO side</span>
+                <label class="bot-name-field">
+                  <span class="bot-name-label">Name</span>
+                  <input type="text" id="botAName" placeholder="Athena" autocomplete="off" value="Athena">
+                </label>
+                <label class="bot-name-field">
+                  <span class="bot-name-label">Role (stay in character)</span>
+                  <input type="text" id="botARole" placeholder="PRO" autocomplete="off" value="PRO" title="e.g. PRO, Climate scientist, Industry advocate">
+                </label>
+              </div>
+              <div class="bot-config-block">
+                <span class="bot-config-heading">CON side</span>
+                <label class="bot-name-field">
+                  <span class="bot-name-label">Name</span>
+                  <input type="text" id="botBName" placeholder="Dion" autocomplete="off" value="Dion">
+                </label>
+                <label class="bot-name-field">
+                  <span class="bot-name-label">Role (stay in character)</span>
+                  <input type="text" id="botBRole" placeholder="CON" autocomplete="off" value="CON" title="e.g. CON, Skeptic, Policy maker">
+                </label>
+              </div>
+            </div>
+            <div style="margin-bottom: 20px;">
+              <label for="maxTurns" style="display: block; margin-bottom: 8px; font-weight: 500; color: var(--text);">Max Turns (1-100):</label>
+              <input type="number" id="maxTurns" min="1" max="100" value="4" style="padding: 10px 14px; border: 2px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 14px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'">
+            </div>
+            <form class="topic-form" id="topicForm">
+              <input type="text" id="topicInput" placeholder="Enter a debate topic..." autocomplete="off">
+              <button type="submit" id="startBtn">Start debate</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="messages-container" id="messagesContainer" style="display: none;">
+          <div class="debate-header" id="debateHeader">
+            <span class="debate-topic" id="debateTopic"></span>
+            <a href="#" class="download-report-btn" id="downloadReportBtn" style="display: none;">Download report (PDF)</a>
+          </div>
+          <div class="messages" id="messages"></div>
+          <div class="judge-summary" id="judgeSummary" style="display: none;"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

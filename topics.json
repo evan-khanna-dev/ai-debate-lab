@@ -1,0 +1,50 @@
+[
+  {
+    "id": "ship_vs_polish",
+    "topic": "Context: A startup has an AI resume review tool. It works well but sometimes gives generic feedback. A big campus career fair is in 10 days.\nDecision: Should the team ship now or delay 3 weeks to improve reliability?\nConstraints: 2 engineers, limited budget, reputation risk.\nSuccess metric: weekly active users + user trust."
+  },
+  {
+    "id": "build_vs_buy_rag",
+    "topic": "Context: A company is building an AI support assistant that answers questions from internal documentation.\nDecision: Should they build their own RAG pipeline or use a managed vendor solution?\nConstraints: Must launch in 6 weeks, small team, needs citations.\nSuccess metric: resolution time + hallucination rate."
+  },
+  {
+    "id": "store_chats_or_not",
+    "topic": "Context: An AI assistant app for students logs user chats to improve responses. Users are privacy-sensitive.\nDecision: Should chat logging be default-on, opt-in, or not stored at all?\nConstraints: Must minimize privacy risk and user distrust.\nSuccess metric: retention + complaint rate."
+  },
+  {
+    "id": "ads_vs_subscription",
+    "topic": "Context: A free mobile app is growing quickly but has no revenue.\nDecision: Should the team add ads or introduce a $5/month subscription?\nConstraints: Users are teens/college students, churn risk is high.\nSuccess metric: revenue in 90 days without killing retention."
+  },
+  {
+    "id": "redesign_ui_now_or_later",
+    "topic": "Context: A product’s UI is functional but outdated. The team is about to launch a major feature.\nDecision: Should they redesign the UI now or wait until after the feature launch?\nConstraints: 1 designer, 3 engineers, deadline in 4 weeks.\nSuccess metric: feature adoption + support ticket volume."
+  },
+  {
+    "id": "logo_brand_color",
+    "topic": "Context: A student productivity app is launching publicly in 2 weeks. The current UI is neutral gray. Marketing wants a bold identity.\nDecision: Should the primary brand color be bright red (energy) or blue (trust)?\nConstraints: Must be accessible (contrast) and appeal to college students.\nSuccess metric: landing page conversion."
+  },
+  {
+    "id": "free_trial_vs_freemium",
+    "topic": "Context: A B2C AI writing assistant is launching.\nDecision: Should it be freemium (limited free forever) or paid with a 7-day free trial?\nConstraints: Need growth, but also need revenue quickly.\nSuccess metric: paid conversion rate."
+  },
+  {
+    "id": "ai_autonomy",
+    "topic": "Context: An AI scheduling assistant can automatically send emails and book meetings.\nDecision: Should it take actions automatically, or always require user confirmation?\nConstraints: Wrong actions could damage trust.\nSuccess metric: task completion rate + user trust."
+  },
+  {
+    "id": "quality_vs_cost",
+    "topic": "Context: An AI chatbot costs too much to run at scale.\nDecision: Should the team switch to a cheaper model (lower quality) or keep the expensive model?\nConstraints: Budget is limited; customer satisfaction matters.\nSuccess metric: margin + satisfaction score."
+  },
+  {
+    "id": "remote_vs_hybrid",
+    "topic": "Context: A 15-person startup is growing fast and hiring new grads.\nDecision: Should the company stay fully remote or move to hybrid (2 days/week in office)?\nConstraints: Culture and productivity tradeoffs.\nSuccess metric: employee retention + output."
+  },
+  {
+    "id": "security_friction_2fa",
+    "topic": "Context: A consumer app is seeing suspicious logins.\nDecision: Should the team require 2FA for all users, even if it adds friction?\nConstraints: Growth depends on easy onboarding.\nSuccess metric: account takeover rate + signup conversion."
+  },
+  {
+    "id": "tech_debt_refactor",
+    "topic": "Context: A product is stable but the codebase is messy and slows development.\nDecision: Should the team spend the next sprint refactoring, or keep shipping features?\nConstraints: Customer demand is high; dev velocity is dropping.\nSuccess metric: speed of feature delivery over next 2 months."
+  }
+]
