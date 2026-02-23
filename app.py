@@ -1,10 +1,18 @@
 """Flask app for AI Debate Lab."""
 import json
 from io import BytesIO
+from datetime import datetime
 from flask import Flask, render_template, request, Response, jsonify, send_file
 from debate import run_debate, save_run, list_runs, get_run
 
 app = Flask(__name__)
+
+# Cost protection guardrails
+DAILY_DEBATE_LIMIT = 40
+MAX_TURNS_PER_DEBATE = 6
+
+# Global daily counter (simple in-memory, resets daily)
+daily_debates = {'date': None, 'count': 0}
 
 
 def generate_debate_pdf(run_data):
@@ -91,6 +99,15 @@ def start_debate():
     if not topic:
         return jsonify({"error": "Topic is required"}), 400
 
+    # Check daily debate limit
+    today = datetime.now().date()
+    global daily_debates
+    if daily_debates['date'] != today:
+        daily_debates = {'date': today, 'count': 0}
+    if daily_debates['count'] >= DAILY_DEBATE_LIMIT:
+        return jsonify({"error": "Daily debate limit reached. Try again tomorrow."}), 429
+    daily_debates['count'] += 1
+
     bot_a_name = (data.get("bot_a_name") or "").strip() or None
     bot_b_name = (data.get("bot_b_name") or "").strip() or None
     bot_a_role = (data.get("bot_a_role") or "").strip() or None
@@ -98,7 +115,7 @@ def start_debate():
     max_turns = data.get("max_turns", 4)
     try:
         max_turns = int(max_turns)
-        max_turns = max(1, min(100, max_turns))
+        max_turns = max(1, min(MAX_TURNS_PER_DEBATE, max_turns))  # Cap at 6
     except (ValueError, TypeError):
         max_turns = 4
 
