@@ -4,8 +4,12 @@ from io import BytesIO
 from datetime import datetime
 from flask import Flask, render_template, request, Response, jsonify, send_file
 from debate import run_debate, save_run, list_runs, get_run
+from flask import session
+import os
+import uuid
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY", "dev-secret")
 
 # Cost protection guardrails
 DAILY_DEBATE_LIMIT = 40
@@ -89,6 +93,8 @@ def generate_debate_pdf(run_data):
 
 @app.route("/")
 def index():
+    if "user_id" not in session:
+        session["user_id"] = str(uuid.uuid4())
     return render_template("index.html")
 
 
@@ -98,6 +104,9 @@ def start_debate():
     topic = (data.get("topic") or "").strip()
     if not topic:
         return jsonify({"error": "Topic is required"}), 400
+    
+    # Get the session ID here while request context is active
+    user_id = session["user_id"]
 
     # Check daily debate limit
     today = datetime.now().date()
@@ -134,6 +143,7 @@ def start_debate():
             bot_b_role=bot_b_role,
             max_turns=max_turns,
         )
+        run_result["user_id"] = user_id
         save_run(run_result)
 
         for msg in messages_sent:
@@ -155,7 +165,8 @@ def start_debate():
 @app.route("/api/debates")
 def api_list_debates():
     runs = list_runs()
-    return jsonify(runs)
+    user_runs = [r for r in runs if r.get("user_id") == session.get("user_id")]
+    return jsonify(user_runs)
 
 
 @app.route("/api/debates/<run_id>")
