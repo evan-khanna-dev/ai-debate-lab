@@ -97,6 +97,11 @@ def index():
         session["user_id"] = str(uuid.uuid4())
     return render_template("index.html")
 
+@app.route("/debug/runs")
+def debug_runs():
+    runs = list_runs()
+    return jsonify(runs)
+
 
 @app.route("/api/debate/start", methods=["POST"])
 def start_debate():
